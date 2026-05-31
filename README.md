@@ -4,7 +4,7 @@ Product catalog with search/filters, a cart drawer, and LocalStorage persistence
 
 ## Live demo
 
-- GitHub Pages (after enabling Pages in repo settings): `https://genezera.github.io/shopcart-ui/`
+- GitHub Pages: `https://genezera.github.io/shopcart-ui/`
 
 ## Features
 

@@ -126,6 +126,7 @@ const sortEl = $("[data-sort]");
 const clearFiltersBtn = $("[data-clear-filters]");
 
 const drawerEl = $("[data-drawer]");
+const drawerPanelEl = drawerEl ? drawerEl.querySelector(".drawer__panel") : null;
 const openCartBtn = $("[data-open-cart]");
 const closeCartBtn = $("[data-close-cart]");
 const cartItemsEl = $("[data-cart-items]");
@@ -138,6 +139,7 @@ const checkoutBtn = $("[data-checkout]");
 
 const toastEl = $("[data-toast]");
 let toastTimer = null;
+let lastDrawerFocus = null;
 
 const products = buildProducts();
 let cart = loadCart();
@@ -176,11 +178,26 @@ function shippingCost(subtotal) {
   return 24.9;
 }
 
+function getFocusable(root) {
+  if (!root) return [];
+  const nodes = root.querySelectorAll(
+    'a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])',
+  );
+  return Array.from(nodes).filter((el) => !el.hasAttribute("disabled"));
+}
+
 function setDrawerOpen(open) {
   if (!drawerEl) return;
+  if (open) lastDrawerFocus = document.activeElement;
   drawerEl.hidden = !open;
   document.body.style.overflow = open ? "hidden" : "";
-  if (open) closeCartBtn?.focus();
+  if (open) {
+    closeCartBtn?.focus();
+  } else {
+    const target = lastDrawerFocus || openCartBtn;
+    if (target && typeof target.focus === "function") target.focus();
+    lastDrawerFocus = null;
+  }
 }
 
 function renderCategoryOptions() {
@@ -451,7 +468,24 @@ drawerEl.addEventListener("click", (ev) => {
 });
 
 document.addEventListener("keydown", (ev) => {
-  if (ev.key === "Escape") setDrawerOpen(false);
+  if (drawerEl.hidden) return;
+  if (ev.key === "Escape") {
+    setDrawerOpen(false);
+    return;
+  }
+  if (ev.key !== "Tab") return;
+  const focusables = getFocusable(drawerPanelEl);
+  if (!focusables.length) return;
+  const first = focusables[0];
+  const last = focusables[focusables.length - 1];
+  const active = document.activeElement;
+  if (ev.shiftKey && active === first) {
+    ev.preventDefault();
+    last.focus();
+  } else if (!ev.shiftKey && active === last) {
+    ev.preventDefault();
+    first.focus();
+  }
 });
 
 clearCartBtn.addEventListener("click", () => {

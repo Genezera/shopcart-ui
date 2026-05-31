@@ -2,6 +2,10 @@
 
 Product catalog with search/filters, a cart drawer, and LocalStorage persistence. Built as a portfolio project (UI, state, UX, responsiveness).
 
+## Live demo
+
+- GitHub Pages (after enabling Pages in repo settings): `https://genezera.github.io/shopcart-ui/`
+
 ## Features
 
 - Catalog with search, category filter, and sorting
@@ -28,8 +32,24 @@ python -m http.server 5173
 
 Open: `http://localhost:5173/`
 
+## Project structure
+
+- `index.html` – layout and drawer markup
+- `styles.css` – styling
+- `app.js` – data, filters/sorting, cart state, storage, and drawer focus trap
+
 ## What this project demonstrates
 
 - UI state and dynamic rendering
 - Simple “componentization” via functions
 - UX best practices (drawer, feedback, empty states)
+
+## Interview talking points
+
+- How filtering/sorting is implemented and kept predictable
+- Cart state model + persistence strategy
+- Accessibility/UX: focus handling in the drawer, Escape/backdrop close, empty states
+
+## License
+
+MIT

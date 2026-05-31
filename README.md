@@ -1,35 +1,35 @@
 # ShopCart UI
 
-Catálogo de produtos com filtros/pesquisa, carrinho lateral (drawer) e persistência em LocalStorage. Projeto pensado para portfólio (UI, estado, UX, responsividade).
+Product catalog with search/filters, a cart drawer, and LocalStorage persistence. Built as a portfolio project (UI, state, UX, responsiveness).
 
 ## Features
 
-- Catálogo com pesquisa, filtro por categoria e ordenação
-- Carrinho em drawer (quantidade + remover + limpar)
-- Resumo de valores (subtotal, frete simulado e total)
-- Persistência do carrinho em LocalStorage
-- Dados mockados (sem backend) com imagens em SVG (data URI)
+- Catalog with search, category filter, and sorting
+- Cart drawer (quantity, remove, clear)
+- Totals summary (subtotal, simulated shipping, total)
+- Cart persistence via LocalStorage
+- Mock data (no backend) with SVG images (data URI)
 
-## Tecnologias
+## Tech
 
 - HTML + CSS
-- JavaScript (sem bibliotecas)
+- JavaScript (no libraries)
 - LocalStorage
 
-## Como rodar
+## Run
 
-- Abra `index.html` no navegador  
-  ou
-- Rode um servidor local na pasta do projeto:
+- Open `index.html` in your browser  
+  or
+- Run a local server in the project folder:
 
 ```bash
 python -m http.server 5173
 ```
 
-Abra: `http://localhost:5173/`
+Open: `http://localhost:5173/`
 
-## O que esse projeto demonstra
+## What this project demonstrates
 
-- Estado de UI e renderização dinâmica
-- Componentização simples via funções
-- Boas práticas de UX (drawer, feedbacks, empty state)
+- UI state and dynamic rendering
+- Simple “componentization” via functions
+- UX best practices (drawer, feedback, empty states)

@@ -8,8 +8,8 @@ function safeJsonParse(value, fallback) {
   }
 }
 
-function brl(value) {
-  return new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(
+function usd(value) {
+  return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(
     value,
   );
 }
@@ -28,74 +28,74 @@ function buildProducts() {
   return [
     {
       id: "p1",
-      name: "Fone Bluetooth Pulse",
-      desc: "Bateria longa, graves fortes e cancelamento de ruído básico.",
+      name: "Pulse Bluetooth Headphones",
+      desc: "Long battery life, punchy bass, and basic noise canceling.",
       price: 249.9,
-      category: "Áudio",
+      category: "Audio",
       featured: 92,
     },
     {
       id: "p2",
-      name: "Teclado Mecânico Neo 75",
-      desc: "Layout compacto, switches táteis e iluminação ajustável.",
+      name: "Neo 75 Mechanical Keyboard",
+      desc: "Compact layout, tactile switches, and adjustable lighting.",
       price: 389.0,
-      category: "Periféricos",
+      category: "Peripherals",
       featured: 88,
     },
     {
       id: "p3",
-      name: "Mouse Pro Glide",
-      desc: "Sensor preciso e ergonomia para longas sessões.",
+      name: "Pro Glide Mouse",
+      desc: "Accurate sensor and ergonomic shape for long sessions.",
       price: 159.9,
-      category: "Periféricos",
+      category: "Peripherals",
       featured: 84,
     },
     {
       id: "p4",
-      name: "Mochila Urban Tech 20L",
-      desc: "Compartimento acolchoado e organização para cabos.",
+      name: "Urban Tech Backpack 20L",
+      desc: "Padded compartment and cable-friendly organization.",
       price: 219.9,
-      category: "Acessórios",
+      category: "Accessories",
       featured: 78,
     },
     {
       id: "p5",
-      name: "Suporte de Notebook AirStand",
-      desc: "Melhora postura e ventilação, com ajuste de altura.",
+      name: "AirStand Laptop Stand",
+      desc: "Better posture and airflow with height adjustment.",
       price: 129.9,
-      category: "Acessórios",
+      category: "Accessories",
       featured: 75,
     },
     {
       id: "p6",
-      name: "Caixa de Som Mini Wave",
-      desc: "Som portátil com resistência a respingos e modo estéreo.",
+      name: "Mini Wave Speaker",
+      desc: "Portable sound with splash resistance and stereo pairing.",
       price: 179.9,
-      category: "Áudio",
+      category: "Audio",
       featured: 81,
     },
     {
       id: "p7",
-      name: "Monitor 27\" QHD Studio",
-      desc: "Cores consistentes, bordas finas e modo leitura.",
+      name: 'Studio 27" QHD Monitor',
+      desc: "Consistent colors, thin bezels, and reading mode.",
       price: 1299.0,
-      category: "Monitores",
+      category: "Monitors",
       featured: 90,
     },
     {
       id: "p8",
-      name: "Hub USB-C 8 em 1",
-      desc: "HDMI, USB 3.0, SD e carregamento pass-through.",
+      name: "USB-C Hub 8-in-1",
+      desc: "HDMI, USB 3.0, SD, and pass-through charging.",
       price: 199.9,
-      category: "Acessórios",
+      category: "Accessories",
       featured: 79,
     },
     {
       id: "p9",
-      name: "Headset Gamer Nova X",
-      desc: "Microfone com redução de ruído e áudio espacial.",
+      name: "Nova X Gaming Headset",
+      desc: "Noise-reducing mic and spatial audio.",
       price: 329.9,
-      category: "Áudio",
+      category: "Audio",
       featured: 83,
     },
   ].map((p, idx) => ({
@@ -190,7 +190,7 @@ function renderCategoryOptions() {
   categoryEl.replaceChildren();
   const allOpt = document.createElement("option");
   allOpt.value = "all";
-  allOpt.textContent = "Todas";
+  allOpt.textContent = "All";
   categoryEl.appendChild(allOpt);
   for (const c of categories) {
     const opt = document.createElement("option");
@@ -271,7 +271,7 @@ function renderProducts() {
 
     const price = document.createElement("span");
     price.className = "price";
-    price.textContent = brl(p.price);
+    price.textContent = usd(p.price);
 
     const row2 = document.createElement("div");
     row2.className = "product__row";
@@ -279,16 +279,16 @@ function renderProducts() {
     const btn = document.createElement("button");
     btn.className = "btn btn--primary";
     btn.type = "button";
-    btn.textContent = "Adicionar";
+    btn.textContent = "Add";
     btn.addEventListener("click", () => {
       addToCart(p.id, 1);
-      showToast("Adicionado ao carrinho.");
+      showToast("Added to cart.");
     });
 
     const ghost = document.createElement("button");
     ghost.className = "btn btn--ghost";
     ghost.type = "button";
-    ghost.textContent = "Ver carrinho";
+    ghost.textContent = "View cart";
     ghost.addEventListener("click", () => setDrawerOpen(true));
 
     row.appendChild(badge);
@@ -323,7 +323,7 @@ function renderCart() {
     const empty = document.createElement("div");
     empty.className = "cart-item";
     empty.innerHTML =
-      '<strong>Carrinho vazio</strong><div class="muted">Adicione alguns itens para ver o resumo.</div>';
+      '<strong>Your cart is empty</strong><div class="muted">Add items to see totals.</div>';
     cartItemsEl.appendChild(empty);
   } else {
     for (const { product: p, qty } of entries) {
@@ -340,10 +340,10 @@ function renderCart() {
       const remove = document.createElement("button");
       remove.className = "icon-btn danger";
       remove.type = "button";
-      remove.textContent = "Remover";
+      remove.textContent = "Remove";
       remove.addEventListener("click", () => {
         addToCart(p.id, -qty);
-        showToast("Removido do carrinho.");
+        showToast("Removed from cart.");
       });
 
       top.appendChild(title);
@@ -354,7 +354,7 @@ function renderCart() {
 
       const unit = document.createElement("span");
       unit.className = "muted";
-      unit.textContent = `${brl(p.price)} / un.`;
+      unit.textContent = `${usd(p.price)} / unit`;
 
       const qtyWrap = document.createElement("div");
       qtyWrap.className = "qty";
@@ -363,7 +363,7 @@ function renderCart() {
       minus.className = "qty__btn";
       minus.type = "button";
       minus.textContent = "−";
-      minus.setAttribute("aria-label", "Diminuir quantidade");
+      minus.setAttribute("aria-label", "Decrease quantity");
       minus.addEventListener("click", () => addToCart(p.id, -1));
 
       const val = document.createElement("span");
@@ -374,7 +374,7 @@ function renderCart() {
       plus.className = "qty__btn";
       plus.type = "button";
       plus.textContent = "+";
-      plus.setAttribute("aria-label", "Aumentar quantidade");
+      plus.setAttribute("aria-label", "Increase quantity");
       plus.addEventListener("click", () => addToCart(p.id, 1));
 
       qtyWrap.appendChild(minus);
@@ -392,7 +392,7 @@ function renderCart() {
       cat.textContent = p.category;
 
       const line = document.createElement("strong");
-      line.textContent = brl(p.price * qty);
+      line.textContent = usd(p.price * qty);
 
       row2.appendChild(cat);
       row2.appendChild(line);
@@ -408,9 +408,9 @@ function renderCart() {
   const subtotal = cartSubtotal();
   const shipping = shippingCost(subtotal);
   const total = subtotal + shipping;
-  subtotalEl.textContent = brl(subtotal);
-  shippingEl.textContent = brl(shipping);
-  totalEl.textContent = brl(total);
+  subtotalEl.textContent = usd(subtotal);
+  shippingEl.textContent = usd(shipping);
+  totalEl.textContent = usd(total);
 }
 
 renderCategoryOptions();
@@ -440,7 +440,7 @@ clearFiltersBtn.addEventListener("click", () => {
   categoryEl.value = "all";
   sortEl.value = "featured";
   renderProducts();
-  showToast("Filtros limpos.");
+  showToast("Filters cleared.");
 });
 
 openCartBtn.addEventListener("click", () => setDrawerOpen(true));
@@ -455,19 +455,18 @@ document.addEventListener("keydown", (ev) => {
 });
 
 clearCartBtn.addEventListener("click", () => {
-  const ok = confirm("Tem certeza que deseja limpar o carrinho?");
+  const ok = confirm("Are you sure you want to clear the cart?");
   if (!ok) return;
   cart = {};
   saveCart(cart);
   renderCart();
-  showToast("Carrinho limpo.");
+  showToast("Cart cleared.");
 });
 
 checkoutBtn.addEventListener("click", () => {
   if (cartItemCount() === 0) {
-    showToast("Seu carrinho está vazio.");
+    showToast("Your cart is empty.");
     return;
   }
-  showToast("Checkout: UI demo (sem backend).");
+  showToast("Checkout: UI demo (no backend).");
 });
-

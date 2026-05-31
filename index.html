@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -7,7 +7,7 @@
     <title>ShopCart UI</title>
     <meta
       name="description"
-      content="Catálogo com filtros/pesquisa, carrinho e persistência em LocalStorage."
+      content="Product catalog with search/filters, cart drawer, and LocalStorage persistence."
     />
     <link rel="stylesheet" href="./styles.css" />
     <script type="module" src="./app.js"></script>
@@ -18,64 +18,64 @@
         <div>
           <a class="back" href="./README.md">README</a>
           <h1 class="title">ShopCart UI</h1>
-          <p class="subtitle">Catálogo • Filtros • Carrinho • LocalStorage</p>
+          <p class="subtitle">Catalog • Filters • Cart • LocalStorage</p>
         </div>
 
         <button class="cart-btn" type="button" data-open-cart>
           <span class="cart-btn__icon" aria-hidden="true">🛒</span>
-          <span>Carrinho</span>
+          <span>Cart</span>
           <span class="cart-btn__count" data-cart-count>0</span>
         </button>
       </div>
 
-      <div class="container controls" aria-label="Filtros">
+      <div class="container controls" aria-label="Filters">
         <label class="control">
-          <span class="control__label">Buscar</span>
+          <span class="control__label">Search</span>
           <input
             class="control__input"
             type="search"
-            placeholder="Ex.: fone, teclado, mochila..."
+            placeholder='e.g. "headphones", "keyboard", "backpack"...'
             autocomplete="off"
             data-search
           />
         </label>
 
         <label class="control">
-          <span class="control__label">Categoria</span>
+          <span class="control__label">Category</span>
           <select class="control__input" data-category></select>
         </label>
 
         <label class="control">
-          <span class="control__label">Ordenar</span>
+          <span class="control__label">Sort</span>
           <select class="control__input" data-sort>
-            <option value="featured" selected>Destaques</option>
-            <option value="price-asc">Preço: menor → maior</option>
-            <option value="price-desc">Preço: maior → menor</option>
-            <option value="name-asc">Nome: A → Z</option>
+            <option value="featured" selected>Featured</option>
+            <option value="price-asc">Price: low → high</option>
+            <option value="price-desc">Price: high → low</option>
+            <option value="name-asc">Name: A → Z</option>
           </select>
         </label>
       </div>
     </header>
 
     <main class="container">
-      <section class="summary" aria-label="Resumo">
+      <section class="summary" aria-label="Summary">
         <div class="summary__pill">
-          <span class="muted">Resultados</span>
+          <span class="muted">Results</span>
           <strong data-result-count>0</strong>
         </div>
         <button class="btn btn--ghost" type="button" data-clear-filters>
-          Limpar filtros
+          Clear filters
         </button>
       </section>
 
-      <section class="grid" aria-label="Produtos" data-products></section>
+      <section class="grid" aria-label="Products" data-products></section>
     </main>
 
-    <aside class="drawer" hidden data-drawer aria-label="Carrinho">
-      <div class="drawer__panel" role="dialog" aria-modal="true" aria-label="Carrinho">
+    <aside class="drawer" hidden data-drawer aria-label="Cart">
+      <div class="drawer__panel" role="dialog" aria-modal="true" aria-label="Cart">
         <header class="drawer__header">
-          <h2 class="drawer__title">Seu carrinho</h2>
-          <button class="icon-btn" type="button" aria-label="Fechar" data-close-cart>
+          <h2 class="drawer__title">Your cart</h2>
+          <button class="icon-btn" type="button" aria-label="Close" data-close-cart>
             ✕
           </button>
         </header>
@@ -88,22 +88,22 @@
           <div class="totals">
             <div class="totals__row">
               <span class="muted">Subtotal</span>
-              <strong data-subtotal>R$ 0,00</strong>
+              <strong data-subtotal>$0.00</strong>
             </div>
             <div class="totals__row">
-              <span class="muted">Frete</span>
-              <strong data-shipping>R$ 0,00</strong>
+              <span class="muted">Shipping</span>
+              <strong data-shipping>$0.00</strong>
             </div>
             <div class="totals__row totals__row--total">
               <span>Total</span>
-              <strong data-total>R$ 0,00</strong>
+              <strong data-total>$0.00</strong>
             </div>
           </div>
           <button class="btn btn--primary" type="button" data-checkout>
-            Finalizar (UI)
+            Checkout (UI)
           </button>
           <button class="btn btn--ghost" type="button" data-clear-cart>
-            Limpar carrinho
+            Clear cart
           </button>
         </footer>
       </div>
